@@ -11,4 +11,6 @@ IMAGE_FEATURES += " \
 
 IMAGE_FEATURES:remove = "${@bb.utils.contains('DISTRO_FEATURES', 'wayland', 'x11-base', '', d)}"
 
+IMAGE_INSTALL:append = " minicom vim"
+
 include recipes-support/images/arduino-image.inc
