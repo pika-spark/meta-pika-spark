@@ -13,9 +13,11 @@ IMAGE_FEATURES += " \
 
 IMAGE_FEATURES:remove = "${@bb.utils.contains('DISTRO_FEATURES', 'wayland', 'x11-base', '', d)}"
 
+include recipes-support/images/arduino-image.inc
+
 IMAGE_INSTALL:append = " vim"
 
-include recipes-support/images/arduino-image.inc
+IMAGE_INSTALL:append = " resize-rootfs"
 
 # Override default arduino user with pika user and set password to "spark"
 # Generated with: echo -n "spark" | openssl passwd -6 -stdin
