@@ -2,8 +2,6 @@ DESCRIPTION = "Minimal Pika Spark image, based on arduino-console-image."
 
 LICENSE = "MIT"
 
-FILESEXTRAPATHS:prepend := "${THISDIR}/configs:"
-
 inherit core-image
 
 IMAGE_FEATURES += " \
@@ -29,10 +27,3 @@ EXTRA_USERS_PARAMS += "groupadd dialout; usermod -a -G dialout ${ARDUINO-USER};"
 
 IMAGE_INSTALL:append = " docker"
 EXTRA_USERS_PARAMS += "groupadd docker; usermod -a -G docker ${ARDUINO-USER};"
-
-# Override the sudoers install from arduino-image.inc because image.bbclass
-# disables do_fetch/do_unpack, so SRC_URI files are never copied to WORKDIR.
-# Install the sudoers file directly from the source tree instead.
-fakeroot do_populate_rootfs_add_custom_sudoers () {
-    install -m 0440 ${THISDIR}/configs/${SUDOERS_FILE} ${IMAGE_ROOTFS}${sysconfdir}/sudoers.d/51-arduino
-}
