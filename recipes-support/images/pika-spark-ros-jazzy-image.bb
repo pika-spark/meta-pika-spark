@@ -12,3 +12,4 @@ inherit ros2_image
 ROS_IMAGE_BASENAME_APPEND = ""
 
 IMAGE_INSTALL:append = " ros-core"
+IMAGE_INSTALL:append = " packagegroup-pika-ros-examples"
